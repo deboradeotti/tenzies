@@ -6,7 +6,7 @@ body {
   background-color: #0B2434;
   margin: 0;
   overflow: hidden;
-  padding: 40px;
+  padding: 16px;
 }
 
 .board {
@@ -88,35 +88,39 @@ body {
   width: 160px;
 }
 
+.counter {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.roll-count {
+  color: #fff;
+  font-family: Karla;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+}
+
 @media screen and (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
   .board {
-    height: 320px;
-    max-width: 320px;
-  }
-
-  .board__title {
-    font-size: 25px;
-  }
-
-  .board__description {
-    font-size: 11px;
+    margin-top: 35%;
+    width: 96%;
+    padding: 16px;
   }
 
   .dice-container {
     gap: 10px;
   }
+}
 
-  .die {
-    height: 36px;
-    padding: 8px;
-    width: 36px;
-  }
-
-  .die__number {
-    font-size: 20px;
-  }
-
-  .button {
-    font-size: 16px;
+@media screen and (max-height: 700px) {
+  .board {
+    height: 460px;
+    margin-top: 32px;
   }
 }

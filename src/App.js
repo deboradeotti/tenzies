@@ -8,6 +8,7 @@ export default function App() {
 
   const [dice, setDice] = React.useState(allNewDice());
   const [tenzies, setTenzies] = React.useState(false);
+  const [rollCount, setRollCount] = React.useState(0);
 
   React.useEffect(() => {
    const allDiceHeld = dice.every(die => die.isHeld);
@@ -42,10 +43,12 @@ export default function App() {
     if(tenzies) {
       setTenzies(false);
       setDice(allNewDice);
+      setRollCount(0);
     } else {
       setDice(prevDice => prevDice.map(die => {
         return die.isHeld ? die : generateNewDie()
-      }))
+      }));
+      setRollCount(prevRollCount => prevRollCount + 1);
     }
   }
 
@@ -60,16 +63,21 @@ export default function App() {
   const { width, height } = useWindowSize()
 
   return(
-    <main className="board">
-      {tenzies && <Confetti width={width} height={height} />}
-      <div>
-        <h1 className="board__title">Tenzies</h1>
-        <p className="board__description">Roll until all dice are the same. Click<br></br>each die to freeze it at its current value<br></br>between rolls.</p>
+    <div>
+      <main className="board">
+        {tenzies && <Confetti width={width} height={height} />}
+        <div>
+          <h1 className="board__title">Tenzies</h1>
+          <p className="board__description">Roll until all dice are the same. Click<br></br>each die to freeze it at its current value<br></br>between rolls.</p>
+        </div>
+        <div className="dice-container">
+          {dieElements}
+        </div>
+        <button className="button" onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
+      </main>
+      <div className="counter">
+        <h3 className="roll-count">{rollCount} roll{rollCount === 1 ? "" : "s"}</h3>
       </div>
-      <div className="dice-container">
-        {dieElements}
-      </div>
-      <button className="button" onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
-    </main>
+    </div>
   )
 }
