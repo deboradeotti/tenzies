@@ -50,9 +50,11 @@ export default function App() {
   }
 
   function holdDice(id) {
-    setDice(prevDice => prevDice.map(die => {
-      return id === die.id ? {...die, isHeld: !die.isHeld} : die
-    }))
+    if(!tenzies) {
+      setDice(prevDice => prevDice.map(die => {
+        return id === die.id ? {...die, isHeld: !die.isHeld} : die
+      }))
+    }
   }
 
   const { width, height } = useWindowSize()
